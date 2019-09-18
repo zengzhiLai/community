@@ -1,4 +1,4 @@
-package cn.lnsf.community.community.Provider;
+package cn.lnsf.community.community.provider;
 
 import cn.lnsf.community.community.dto.AccessTokenDTO;
 import cn.lnsf.community.community.dto.GithubUser;
