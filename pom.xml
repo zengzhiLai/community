@@ -72,14 +72,18 @@
                 <artifactId>flyway-maven-plugin</artifactId>
                 <version>6.0.3</version>
                 <configuration>
+                    <!--properties文件中的url 数据库连接的路径-->
                     <url>jdbc:h2:~/community</url>
+                    <!--properties文件中的username-->
                     <user>sa</user>
+                    <!--properties文件中的password-->
                     <password>123</password>
                 </configuration>
                 <dependencies>
                     <dependency>
                         <groupId>com.h2database</groupId>
                         <artifactId>h2</artifactId>
+                        <!--H2数据库版本要与dependency中引入的保持一致-->
                         <version>1.4.199</version>
                     </dependency>
                 </dependencies>

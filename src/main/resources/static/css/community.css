@@ -1,0 +1,20 @@
+body {
+    background-color: #efefef;
+}
+ul{
+    margin: 15px;
+    padding: 0;
+}
+ul li{
+    margin: 5px;
+}
+
+.main {
+    margin: 30px 100px 50px;
+    background-color: white;
+}
+
+.btn-publish {
+    float: right;
+    margin-bottom: 15px;
+}
