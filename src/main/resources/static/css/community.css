@@ -1,11 +1,13 @@
 body {
     background-color: #efefef;
 }
-ul{
+
+ul {
     margin: 15px;
     padding: 0;
 }
-ul li{
+
+ul li {
     margin: 5px;
 }
 
@@ -17,13 +19,25 @@ ul li{
     float: right;
     margin-bottom: 15px;
 }
-@media (min-width:1200px) {
+
+.media-object {
+    width: 38px;
+    height: 38px;
+}
+
+.text-desc {
+    font-size: 12px;
+    font-weight: normal;
+    color: #999;
+}
+
+@media (min-width: 1200px) {
     .main {
         margin: 30px 100px 50px;
     }
 }
 
-@media (max-width:992px) {
+@media (max-width: 992px) {
     .main {
         margin: 30px 30px 50px;
     }
