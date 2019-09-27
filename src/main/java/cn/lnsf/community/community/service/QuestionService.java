@@ -1,5 +1,6 @@
 package cn.lnsf.community.community.service;
 
+import cn.lnsf.community.community.dto.PaginationDTO;
 import cn.lnsf.community.community.dto.QuestionDTO;
 import cn.lnsf.community.community.mapper.QuestionMapper;
 import cn.lnsf.community.community.mapper.UserMapper;
@@ -25,18 +26,33 @@ public class QuestionService {
     @Autowired
     UserMapper userMapper;
 
-    public List<QuestionDTO> list() {
+    public PaginationDTO list(Integer page, Integer size) {
 
-        List<Question> questions = questionMapper.list();
-        List<QuestionDTO> questionDTOList=new ArrayList<>();
+        PaginationDTO paginationDTO = new PaginationDTO();
+        Integer totalCount = questionMapper.count(); // 总问题数
+        paginationDTO.setPagination(totalCount, page, size);
+
+        if (page < 1) {
+            page = 1;
+        }
+        if (page > paginationDTO.getTotalPage()) {
+            page = paginationDTO.getTotalPage();
+        }
+
+        Integer offset = size * (page - 1); //偏移量
+
+        List<Question> questions = questionMapper.list(offset, size);
+        List<QuestionDTO> questionDTOList = new ArrayList<>();
+
         for (Question question : questions) {
-            User user=userMapper.findById(question.getCreator());
+            User user = userMapper.findById(question.getCreator());
             QuestionDTO questionDTO = new QuestionDTO();
             BeanUtils.copyProperties(question, questionDTO);
             questionDTO.setUser(user);
             questionDTOList.add(questionDTO);
         }
+        paginationDTO.setQuestions(questionDTOList);
 
-        return questionDTOList;
+        return paginationDTO;
     }
 }
