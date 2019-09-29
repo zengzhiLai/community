@@ -32,6 +32,7 @@ public class QuestionService {
 
         Integer totalCount = questionMapper.count();
 
+        //知道总问题数求总页数
         Integer totalPage;
         if (totalCount % size == 0) {
             totalPage = totalCount / size;
@@ -104,5 +105,17 @@ public class QuestionService {
         paginationDTO.setQuestions(questionDTOList);
 
         return paginationDTO;
+    }
+
+    public QuestionDTO getById(Integer id) {
+
+        Question question= questionMapper.getById(id);
+        QuestionDTO questionDTO=new QuestionDTO();
+        BeanUtils.copyProperties(question, questionDTO);
+
+        User user = userMapper.findById(question.getCreator());
+        questionDTO.setUser(user);
+
+        return questionDTO;
     }
 }

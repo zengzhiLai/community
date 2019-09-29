@@ -11,13 +11,13 @@ import java.util.List;
  */
 @Data
 public class PaginationDTO {
-    private List<QuestionDTO> questions;
-    private boolean showPrevious; //前一页
-    private boolean showFistPage; //第一页
-    private boolean showNext; //下一页
-    private boolean showEndPage; //最后一页
+    private List<QuestionDTO> questions;//记录问题
+    private boolean showPrevious; //展示前一页
+    private boolean showFistPage; //展示第一页
+    private boolean showNext; //展示下一页
+    private boolean showEndPage; //展示最后一页
     private Integer page;  //当前页
-    private List<Integer> pages = new ArrayList<>();
+    private List<Integer> pages = new ArrayList<>();//记录页码
     private Integer totalPage; //总页数
 
     public void setPagination(Integer totalPage, Integer page) {

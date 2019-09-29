@@ -37,8 +37,13 @@ ul li {
     }
 }
 
-@media (max-width: 992px) {
+@media (max-width: 1200px) {
     .main {
         margin: 30px 30px 50px;
     }
+}
+
+.community-menu{
+    color: #999;
+    font-size: 13px;
 }

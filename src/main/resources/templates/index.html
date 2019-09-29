@@ -25,7 +25,9 @@
                     </a>
                 </div>
                 <div class="media-body">
-                    <h4 class="media-heading" th:text="${question.title}"></h4>
+                    <h4 class="media-heading" >
+                        <a th:href="@{'/question/'+ ${question.id}}" th:text="${question.title}"></a>
+                    </h4>
                     <span th:text="${question.description}"></span> <br>
                     <span class="text-desc">
                         <span th:text="${question.commentCount}"></span>个回复 •
@@ -51,7 +53,7 @@
                     </li>
 
                     <li th:each="page:${pagination.pages}" th:class="${pagination.page==page}? 'active' : ''">
-                        <a href="#" th:href="@{/(page=${page})}" th:text="${page}"></a>
+                        <a th:href="@{/(page=${page})}" th:text="${page}"></a>
                     </li>
 
                     <li th:if="${pagination.showNext}">
