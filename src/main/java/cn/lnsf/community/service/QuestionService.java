@@ -4,6 +4,7 @@ import cn.lnsf.community.dto.PaginationDTO;
 import cn.lnsf.community.dto.QuestionDTO;
 import cn.lnsf.community.exception.CustomizeErrorCode;
 import cn.lnsf.community.exception.CustomizeException;
+import cn.lnsf.community.mapper.QuestionExtMapper;
 import cn.lnsf.community.mapper.QuestionMapper;
 import cn.lnsf.community.mapper.UserMapper;
 import cn.lnsf.community.model.Question;
@@ -26,6 +27,9 @@ public class QuestionService {
 
     @Autowired
     QuestionMapper questionMapper;
+
+    @Autowired
+    QuestionExtMapper questionExtMapper;
 
     @Autowired
     UserMapper userMapper;
@@ -138,6 +142,9 @@ public class QuestionService {
             //创建
             question.setGmtCreate(System.currentTimeMillis());
             question.setGmtModified(question.getGmtCreate());
+            question.setViewCount(0);
+            question.setLikeCount(0);
+            question.setCommentCount(0);
             questionMapper.insert(question);
         } else {
             //更新
@@ -154,5 +161,28 @@ public class QuestionService {
                 throw new CustomizeException(CustomizeErrorCode.QUESTION_NOT_FOUND);
             }
         }
+    }
+
+    /**
+     * 累加阅读数
+     * @param id
+     */
+    public void incView(Integer id) {
+        /*
+        // 没考虑并发条件下阅读数变化
+        // 在数据库中做自增，即view_count=view_count+1（解决方法）
+
+            Question question = questionMapper.selectByPrimaryKey(id);
+            Question updateQuestion = new Question();
+            updateQuestion.setViewCount(question.getViewCount()+1);
+            QuestionExample questionExample = new QuestionExample();
+            questionExample.createCriteria().andIdEqualTo(id);
+            questionMapper.updateByExampleSelective(updateQuestion, questionExample);
+         */
+        Question question = new Question();
+        question.setId(id);
+        question.setViewCount(1);
+        questionExtMapper.incView(question);
+
     }
 }
