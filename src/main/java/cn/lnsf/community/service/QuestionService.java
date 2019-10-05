@@ -76,7 +76,7 @@ public class QuestionService {
         return paginationDTO;
     }
 
-    public PaginationDTO list(Integer userId, Integer page, Integer size) {
+    public PaginationDTO list(Long userId, Integer page, Integer size) {
 
         PaginationDTO paginationDTO = new PaginationDTO();
 
@@ -120,7 +120,7 @@ public class QuestionService {
         return paginationDTO;
     }
 
-    public QuestionDTO getById(Integer id) {
+    public QuestionDTO getById(Long id) {
 
         Question question = questionMapper.selectByPrimaryKey(id);
 
@@ -167,7 +167,7 @@ public class QuestionService {
      * 累加阅读数
      * @param id
      */
-    public void incView(Integer id) {
+    public void incView(Long id) {
         /*
         // 没考虑并发条件下阅读数变化
         // 在数据库中做自增，即view_count=view_count+1（解决方法）
