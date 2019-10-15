@@ -3,8 +3,9 @@ body {
 }
 
 ul {
-    margin: 15px;
+    margin: 10px;
     padding: 0;
+    list-style: none;
 }
 
 ul li {
@@ -25,6 +26,10 @@ ul li {
     height: 38px;
 }
 
+.media-body {
+    padding: 10px 0;
+}
+
 .text-desc {
     font-size: 12px;
     font-weight: normal;
@@ -43,7 +48,86 @@ ul li {
     }
 }
 
-.community-menu{
+.community-menu {
+    display: block;
+    margin-bottom: 15px;
     color: #999;
     font-size: 13px;
+}
+
+.comment {
+    margin: 10px 0;
+}
+
+.btn-comment {
+    float: right;
+    margin-bottom: 10px;
+}
+
+.comments {
+    margin-bottom: 15px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 5px;
+}
+
+.sub-comments {
+    border-radius: 5px;
+    margin-top: 10px;
+    border: 1px solid #eee;
+    padding-top: 15px;
+    margin-bottom: 15px;
+}
+
+.sub-comments .btn {
+    margin: 10px 0;
+}
+
+.comment_sp {
+    margin-top: 0;
+}
+
+.menu {
+    color: #999;
+    margin-top: 5px;
+}
+
+.menu .icon {
+    margin-right: 6px;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.menu .active {
+    color: #499ef3;
+}
+
+.menu .icon:hover {
+    color: #499ef3;
+}
+
+.question-tag {
+    margin-right: 5px;
+}
+.question-related{
+    line-height: 20px;
+    font-size: 12px;
+    margin-left: 0px;
+    padding-left: 0;
+}
+#select-tag{
+    display: none;
+}
+.publish-tags-style{
+    padding-top: 5px;
+}
+.publish-tag-style{
+    color: #00965e;
+    margin: .25rem!important;
+    display: inline-block;
+    font-size: 1.34rem;
+    padding: 0 .375rem;
+    height: 1.5rem;
+    line-height: 1.5rem;
+    border-radius: .1875rem;
+    background-color: rgba(0,150,94,.1);
 }

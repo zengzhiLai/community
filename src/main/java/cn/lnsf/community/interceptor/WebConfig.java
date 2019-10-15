@@ -18,6 +18,8 @@ public class WebConfig implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
+        // addPathPatterns() 对哪些文件进行拦截
+        // excludePathPatterns() 不对哪些文件拦截
         registry.addInterceptor(sessionInterceptor).addPathPatterns("/**");
     }
 }
