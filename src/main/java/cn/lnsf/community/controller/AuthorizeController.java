@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.UUID;
 
 /**
+ * 登录授权、退出登录
  * @author ：赖增智
  * @date ：Created in 2019-6-1 13:32
  */

@@ -3,13 +3,13 @@ package cn.lnsf.community.cache;
 import cn.lnsf.community.dto.TagDTO;
 import org.apache.commons.lang3.StringUtils;
 
-import javax.swing.text.html.HTML;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
 /**
+ * 标签缓存
  * @author ：赖增智
  * @date ：Created in 2019-10-15 13:01
  */

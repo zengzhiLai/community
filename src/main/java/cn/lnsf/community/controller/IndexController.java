@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 /**
+ * 首页
  * @author ：赖增智
  * @date ：Created in 2019-5-29 0:57
  */
