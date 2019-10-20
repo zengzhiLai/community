@@ -114,6 +114,12 @@ public class CommentService {
         notificationMapper.insert(notification);
     }
 
+    /**
+     * 通过问题id查找评论信息
+     * @param id
+     * @param type
+     * @return
+     */
     public List<CommentDTO> listByTargetId(Long id, CommentTypeEnum type) {
         CommentExample commentExample = new CommentExample();
         commentExample.createCriteria()

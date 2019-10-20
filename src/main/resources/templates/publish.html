@@ -32,7 +32,7 @@
                     <label for="tag">添加标签:</label>
                     <input type="text" class="form-control" th:value="${tag}" id="tag" name="tag" autocomplete="off" placeholder="输入标签，以 , 分隔" onclick="showSelectTag()">
                     <!--标签展示-->
-                    <div id="select-tag">
+                    <div id="publish-select-tag">
                         <ul class="nav nav-tabs" role="tablist">
                             <li role="presentation" th:each="selectCategory,selectCategoryStat : ${tags}" th:class="${selectCategoryStat.first ? 'active': ''}">
                                 <a th:href="${'#'+selectCategory.categoryName}" aria-controls="home" role="tab" data-toggle="tab" th:text="${selectCategory.categoryName}"></a>
@@ -60,7 +60,7 @@
                         </div>
 
                         <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
-                            <button type="submit" class="btn btn-success btn-publish">发布</button>
+                            <button type="submit" class="btn btn-success publish-btn">发布</button>
                         </div>
                     </div>
 

@@ -1,9 +1,10 @@
 package cn.lnsf.community.enums;
 
 /**
- * 通知的阅读状态 0 未阅读 ，1 阅读
+ * 通知的阅读状态
+ * 0 未阅读 ，1 阅读
  *
- * @author ：赖增智
+ * @author ：zengzhilai
  * @date ：Created in 2019-10-19 20:06
  */
 public enum NotificationStatusEnum {

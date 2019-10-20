@@ -1,9 +1,10 @@
 package cn.lnsf.community.enums;
 
 /**
- * 通知的类型 1 回复问题，2 回复评论
+ * 通知的类型
+ * 1 回复问题，2 回复评论
  *
- * @author ：赖增智
+ * @author ：zengzhilai
  * @date ：Created in 2019-10-19 19:57
  */
 public enum NotificationTypeEnum {
@@ -12,6 +13,11 @@ public enum NotificationTypeEnum {
     private int type;
     private String name;
 
+    /**
+     * 返回type对应的名称
+     * @param type
+     * @return
+     */
     public static String nameOfType(int type) {
         for (NotificationTypeEnum notificationTypeEnum : NotificationTypeEnum.values()) {
             if (notificationTypeEnum.getType() == type)

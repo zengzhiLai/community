@@ -112,7 +112,7 @@ function collapseComments(e) {
 }
 
 function showSelectTag() {
-    $("#select-tag").show();
+    $("#publish-select-tag").show();
 }
 
 /**

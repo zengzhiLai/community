@@ -1,5 +1,8 @@
 package cn.lnsf.community.exception;
 
+/**
+ * 自定义的错误代码
+ */
 public enum CustomizeErrorCode implements ICustomizeErrorCode {
     QUESTION_NOT_FOUND(2001, "问题不存在或已被删除！"),
     TARGET_PARAM_FOUND(2002, "未选中任何问题或评论进行回复"),

@@ -1,5 +1,10 @@
 package cn.lnsf.community.enums;
 
+/**
+ * 评论的类型
+ * 对问题评论（一级评论）
+ * 对评论评论（二级评论）
+ */
 public enum CommentTypeEnum {
     QUESTION(1),
     COMMENT(2);

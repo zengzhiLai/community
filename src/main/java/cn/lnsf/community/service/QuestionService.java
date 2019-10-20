@@ -22,7 +22,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * @author ：赖增智
+ * @author ：zengzhilai
  * @date ：Created in 2019-9-23 15:56
  */
 @Service
@@ -125,6 +125,11 @@ public class QuestionService {
         return paginationDTO;
     }
 
+    /**
+     * 通过问题id查找问题的信息以及问题创建者的信息
+     * @param id
+     * @return
+     */
     public QuestionDTO getById(Long id) {
 
         Question question = questionMapper.selectByPrimaryKey(id);
@@ -148,7 +153,7 @@ public class QuestionService {
      */
     public void createOrUpdate(Question question) {
         if (question.getId() == null) {
-            //创建
+            // 创建
             question.setGmtCreate(System.currentTimeMillis());
             question.setGmtModified(question.getGmtCreate());
             question.setViewCount(0);
@@ -156,7 +161,7 @@ public class QuestionService {
             question.setCommentCount(0);
             questionMapper.insert(question);
         } else {
-            //更新
+            // 更新
             Question updateQuestion = new Question();
             updateQuestion.setGmtModified(System.currentTimeMillis());
             updateQuestion.setTitle(question.getTitle());

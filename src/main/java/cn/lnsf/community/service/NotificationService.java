@@ -28,6 +28,13 @@ public class NotificationService {
     @Autowired
     private NotificationMapper notificationMapper;
 
+    /**
+     * 分页展示通知信息
+     * @param userId
+     * @param page
+     * @param size
+     * @return
+     */
     public PaginationDTO list(Long userId, Integer page, Integer size) {
 
         PaginationDTO<NotificationDTO> paginationDTO = new PaginationDTO();
@@ -58,6 +65,7 @@ public class NotificationService {
 
         notificationExample.createCriteria()
                 .andReceiverEqualTo(userId);
+        // 按创建时间倒序排序
         notificationExample.setOrderByClause("gmt_create desc");
         List<Notification> notifications = notificationMapper.selectByExampleWithRowbounds(notificationExample, new RowBounds(offset, size));
 
@@ -77,24 +85,41 @@ public class NotificationService {
         return paginationDTO;
     }
 
+    /**
+     * 统计 未阅读的通知数
+     * @param userId
+     * @return
+     */
     public Long unreadCount(Long userId) {
         NotificationExample notificationExample = new NotificationExample();
+        // 数据库查找与 用户id、通知未阅读状态 匹配的记录
         notificationExample.createCriteria()
                 .andReceiverEqualTo(userId)
                 .andStatusEqualTo(NotificationStatusEnum.UNREAD.getStatus());
         return notificationMapper.countByExample(notificationExample);
     }
 
+    /**
+     * 阅读通知
+     * @param id
+     * @param user
+     * @return
+     */
     public NotificationDTO read(Long id, User user) {
         Notification notification = notificationMapper.selectByPrimaryKey(id);
+        // 找不到通知
         if (notification == null) {
             throw new CustomizeException(CustomizeErrorCode.NOTIFICATION_NOT_FOUND);
         }
+        // 收到通知者 与 当前用户id 不一致
         if (!notification.getReceiver().equals(user.getId())) {
             throw new CustomizeException(CustomizeErrorCode.READ_NOTIFICATION_FAIL);
         }
+        // 设置通知为阅读状态，并更新通知notification表
         notification.setStatus(NotificationStatusEnum.READ.getStatus());
         notificationMapper.updateByPrimaryKey(notification);
+
+        // 将查找到的相关通知的信息放入dto里
         NotificationDTO notificationDTO = new NotificationDTO();
         BeanUtils.copyProperties(notification, notificationDTO);
         notificationDTO.setTypeName(NotificationTypeEnum.nameOfType(notification.getType()));
