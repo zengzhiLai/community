@@ -34,13 +34,16 @@
                 </div>
                 <script type="text/javascript">
                     $(function () {
-                        var editor = editormd("question-editor", {
+                        editormd("question-editor", {
                             width: "100%",
                             height: "350",
                             path: "/js/lib/",
                             delay: 0,
-                            watch: false,
-                            placeholder: "请输入问题描述"
+                            watch: false, // 不预览
+                            placeholder: "请输入问题描述",
+                            imageUpload: true,          // 允许上传图片
+                            imageFormats: ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
+                            imageUploadURL: "/file/upload",  // 上传 url
                         });
                     });
                 </script>
