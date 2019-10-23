@@ -63,9 +63,6 @@ public class QcloudProvider {
             ObjectMetadata objectMetadata = new ObjectMetadata();
             // 设置 Content type, 默认是 application/octet-stream
             objectMetadata.setContentType(mimeType);
-            Date expirationTime = new Date();
-            expirationTime.setTime(System.currentTimeMillis() + 31104000L);
-            objectMetadata.setExpirationTime(expirationTime);
 
             /**
              * putObject() 上传对象到指定的存储桶中
@@ -80,6 +77,8 @@ public class QcloudProvider {
             if (response != null && response.getRequestId() != null) {
                 // 获取请求预签名 URL
                 GeneratePresignedUrlRequest urlRequest = new GeneratePresignedUrlRequest(bucketName, generatedFileName, HttpMethodName.GET);
+                Date expirationDate = new Date(System.currentTimeMillis() + 10L * 12L * 30L * 24L * 60L * 60L * 1000L);
+                urlRequest.setExpiration(expirationDate);
                 URL url = cosClient.generatePresignedUrl(urlRequest);
                 // 关闭客户端(关闭后台线程)
                 cosClient.shutdown();

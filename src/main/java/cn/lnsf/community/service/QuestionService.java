@@ -2,6 +2,7 @@ package cn.lnsf.community.service;
 
 import cn.lnsf.community.dto.PaginationDTO;
 import cn.lnsf.community.dto.QuestionDTO;
+import cn.lnsf.community.dto.QuestionQueryDTO;
 import cn.lnsf.community.exception.CustomizeErrorCode;
 import cn.lnsf.community.exception.CustomizeException;
 import cn.lnsf.community.mapper.QuestionExtMapper;
@@ -37,11 +38,20 @@ public class QuestionService {
     @Autowired
     UserMapper userMapper;
 
-    public PaginationDTO list(Integer page, Integer size) {
+    public PaginationDTO list(String search,Integer page, Integer size) {
+
+        if (StringUtils.isNotBlank(search)) {
+            String[] tags = StringUtils.split(search, " ");
+            search = Arrays.stream(tags).collect(Collectors.joining("|"));
+
+        }
+
 
         PaginationDTO paginationDTO = new PaginationDTO();
 
-        Integer totalCount = (int) questionMapper.countByExample(new QuestionExample());
+        QuestionQueryDTO questionQueryDTO = new QuestionQueryDTO();
+        questionQueryDTO.setSearch(search);
+        Integer totalCount =  questionExtMapper.countBySearch(questionQueryDTO);
 
         //知道总问题数求总页数
         Integer totalPage;
@@ -65,7 +75,9 @@ public class QuestionService {
 
         QuestionExample questionExample = new QuestionExample();
         questionExample.setOrderByClause("gmt_create desc");
-        List<Question> questions = questionMapper.selectByExampleWithRowbounds(questionExample, new RowBounds(offset, size));
+        questionQueryDTO.setSize(size);
+        questionQueryDTO.setPage(offset);
+        List<Question> questions = questionExtMapper.selectBySearch(questionQueryDTO);
 
         List<QuestionDTO> questionDTOList = new ArrayList<>();
 
