@@ -146,3 +146,11 @@ ul li {
     border-radius: .1875rem;
     background-color: rgba(0, 150, 94, .1);
 }
+
+/**
+ * 尾部
+ */
+.footer {
+    padding: 10px 25%;
+    color: #666;
+}
