@@ -2,6 +2,7 @@ package cn.lnsf.community.controller;
 
 import cn.lnsf.community.dto.FileDTO;
 import cn.lnsf.community.provider.QcloudProvider;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +18,7 @@ import javax.servlet.http.HttpServletRequest;
  * @date ：Created in 2019-10-21 14:20
  */
 @Controller
+@Slf4j
 public class FileController {
 
     @Autowired
@@ -34,11 +36,12 @@ public class FileController {
             fileDTO.setUrl(fileName);
             return fileDTO;
         }catch (Exception e){
-            e.printStackTrace();
+            log.error("upload error", e);
+            FileDTO fileDTO = new FileDTO();
+            fileDTO.setSuccess(0);
+            fileDTO.setMessage("上传失败");
+            return fileDTO;
         }
-        FileDTO fileDTO = new FileDTO();
-        fileDTO.setSuccess(1);
-        fileDTO.setUrl("/images/zhi.png");
-        return fileDTO;
+
     }
 }

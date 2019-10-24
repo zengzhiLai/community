@@ -7,11 +7,14 @@ import com.qcloud.cos.ClientConfig;
 import com.qcloud.cos.auth.BasicCOSCredentials;
 import com.qcloud.cos.auth.COSCredentials;
 import com.qcloud.cos.exception.CosClientException;
+import com.qcloud.cos.exception.CosServiceException;
 import com.qcloud.cos.http.HttpMethodName;
 import com.qcloud.cos.model.GeneratePresignedUrlRequest;
 import com.qcloud.cos.model.ObjectMetadata;
 import com.qcloud.cos.model.PutObjectResult;
 import com.qcloud.cos.region.Region;
+import com.sun.media.jfxmedia.logging.Logger;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +28,7 @@ import java.util.UUID;
  * @date ：Created in 2019-10-21 17:06
  */
 @Service
+@Slf4j
 public class QcloudProvider {
 
     @Value("${qcloud.secret.id}")
@@ -63,6 +67,8 @@ public class QcloudProvider {
             ObjectMetadata objectMetadata = new ObjectMetadata();
             // 设置 Content type, 默认是 application/octet-stream
             objectMetadata.setContentType(mimeType);
+            Date expirationTime = new Date(System.currentTimeMillis() +  24L * 60L * 60L * 1000L);
+            objectMetadata.setExpirationTime(expirationTime);
 
             /**
              * putObject() 上传对象到指定的存储桶中
@@ -84,10 +90,11 @@ public class QcloudProvider {
                 cosClient.shutdown();
                 return url.toString();
             } else {
+                log.error("upload error , {}", response);
                 throw new CustomizeException(CustomizeErrorCode.FILE_UPLOAD_FAIL);
             }
         } catch (CosClientException e) {
-            e.printStackTrace();
+            log.error("upload error , {}", fileName,e);
             throw new CustomizeException(CustomizeErrorCode.FILE_UPLOAD_FAIL);
         }
     }

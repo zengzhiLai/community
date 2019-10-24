@@ -5,6 +5,7 @@ import cn.lnsf.community.dto.GithubUser;
 import cn.lnsf.community.model.User;
 import cn.lnsf.community.provider.GithubProvider;
 import cn.lnsf.community.service.UserService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -22,6 +23,7 @@ import java.util.UUID;
  * @date ：Created in 2019-6-1 13:32
  */
 @Controller
+@Slf4j
 public class AuthorizeController {
 
     @Autowired
@@ -63,6 +65,7 @@ public class AuthorizeController {
 
             return "redirect:/";
         } else {
+            log.error("callback get github error , {} ",githubUser);
             //登录失败，重新登录
             return "redirect:/";
         }
