@@ -27,7 +27,8 @@ import java.util.UUID;
  */
 @Service
 @Slf4j
-public class QcloudProvider {
+public class
+QcloudProvider {
 
     @Value("${qcloud.secret.id}")
     private String secretId;

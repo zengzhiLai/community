@@ -38,7 +38,7 @@ public class QuestionService {
     @Autowired
     UserMapper userMapper;
 
-    public PaginationDTO list(String search, Integer page, Integer size) {
+    public PaginationDTO list(String search,String tag,  Integer page, Integer size) {
 
         if (StringUtils.isNotBlank(search)) {
             String[] tags = StringUtils.split(search, " ");
@@ -50,6 +50,7 @@ public class QuestionService {
 
         QuestionQueryDTO questionQueryDTO = new QuestionQueryDTO();
         questionQueryDTO.setSearch(search);
+        questionQueryDTO.setTag(tag);
         Integer totalCount = questionExtMapper.countBySearch(questionQueryDTO);
 
         //知道总问题数求总页数
