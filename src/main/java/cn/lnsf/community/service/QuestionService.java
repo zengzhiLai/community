@@ -38,7 +38,7 @@ public class QuestionService {
     @Autowired
     UserMapper userMapper;
 
-    public PaginationDTO list(String search,Integer page, Integer size) {
+    public PaginationDTO list(String search, Integer page, Integer size) {
 
         if (StringUtils.isNotBlank(search)) {
             String[] tags = StringUtils.split(search, " ");
@@ -46,12 +46,11 @@ public class QuestionService {
 
         }
 
-
         PaginationDTO paginationDTO = new PaginationDTO();
 
         QuestionQueryDTO questionQueryDTO = new QuestionQueryDTO();
         questionQueryDTO.setSearch(search);
-        Integer totalCount =  questionExtMapper.countBySearch(questionQueryDTO);
+        Integer totalCount = questionExtMapper.countBySearch(questionQueryDTO);
 
         //知道总问题数求总页数
         Integer totalPage;
@@ -71,7 +70,7 @@ public class QuestionService {
 
         paginationDTO.setPagination(totalPage, page);
 
-        Integer offset = size * (page - 1); //偏移量
+        Integer offset = page < 1 ? page = 0 : size * (page - 1); //偏移量
 
         QuestionExample questionExample = new QuestionExample();
         questionExample.setOrderByClause("gmt_create desc");
@@ -139,6 +138,7 @@ public class QuestionService {
 
     /**
      * 通过问题id查找问题的信息以及问题创建者的信息
+     *
      * @param id
      * @return
      */
@@ -161,6 +161,7 @@ public class QuestionService {
 
     /**
      * 更新或创建问题
+     *
      * @param question
      */
     public void createOrUpdate(Question question) {
@@ -215,6 +216,7 @@ public class QuestionService {
 
     /**
      * 匹配标签查询相关问题
+     *
      * @param queryDTO
      * @return questionDTOS
      */
