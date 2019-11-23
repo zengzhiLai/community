@@ -49,7 +49,8 @@ QcloudProvider {
      */
     public String upload(InputStream fileStream, String mimeType, String fileName) {
         String generatedFileName;
-        String[] filePaths = fileName.split("\\."); // 两个反斜杠进行转义
+        // 两个反斜杠进行转义
+        String[] filePaths = fileName.split("\\.");
         if (filePaths.length > 1) {
             generatedFileName = UUID.randomUUID().toString() + "." + filePaths[filePaths.length - 1];
         } else {

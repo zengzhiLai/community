@@ -22,7 +22,7 @@ import javax.servlet.http.HttpServletRequest;
 public class FileController {
 
     @Autowired
-    QcloudProvider qcloudProvider;
+    private QcloudProvider qcloudProvider;
 
     @RequestMapping("/file/upload")
     @ResponseBody

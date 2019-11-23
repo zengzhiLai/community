@@ -30,13 +30,13 @@ import java.util.stream.Collectors;
 public class QuestionService {
 
     @Autowired
-    QuestionMapper questionMapper;
+    private QuestionMapper questionMapper;
 
     @Autowired
-    QuestionExtMapper questionExtMapper;
+    private QuestionExtMapper questionExtMapper;
 
     @Autowired
-    UserMapper userMapper;
+    private UserMapper userMapper;
 
     public PaginationDTO list(String search,String tag,  Integer page, Integer size) {
 
@@ -197,22 +197,12 @@ public class QuestionService {
      * @param id
      */
     public void incView(Long id) {
-        /*
-        // 没考虑并发条件下阅读数变化
-        // 在数据库中做自增，即view_count=view_count+1（解决方法）
-
-            Question question = questionMapper.selectByPrimaryKey(id);
-            Question updateQuestion = new Question();
-            updateQuestion.setViewCount(question.getViewCount()+1);
-            QuestionExample questionExample = new QuestionExample();
-            questionExample.createCriteria().andIdEqualTo(id);
-            questionMapper.updateByExampleSelective(updateQuestion, questionExample);
-         */
+        // 考虑并发条件下阅读数变化
+        // 在数据库中做自增，即view_count=view_count+1
         Question question = new Question();
         question.setId(id);
         question.setViewCount(1);
         questionExtMapper.incView(question);
-
     }
 
     /**
